@@ -9,6 +9,7 @@ import {
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideStore } from '@ngrx/store';
 const routerProviderFeatures: RouterFeatures[] = [
   withEnabledBlockingInitialNavigation(),
   withComponentInputBinding(),
@@ -18,5 +19,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, ...routerProviderFeatures),
     provideAnimationsAsync(), provideAnimationsAsync(),
-  ],
+    provideStore()
+],
 };
