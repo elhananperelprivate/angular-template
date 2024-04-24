@@ -1,0 +1,7 @@
+<div>
+  <ul>
+    @for (video of (videos$ | async); track video) {
+      <li>{{ video | json }}</li>
+    }
+  </ul>
+</div>

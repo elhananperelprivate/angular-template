@@ -1,4 +1,4 @@
-import { ApplicationConfig } from '@angular/core';
+import {ApplicationConfig, importProvidersFrom} from '@angular/core';
 import {
   provideRouter,
   RouterFeatures,
@@ -10,6 +10,9 @@ import {
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideStore } from '@ngrx/store';
+import {BrowserModule} from "@angular/platform-browser";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {HttpClientModule} from "@angular/common/http";
 const routerProviderFeatures: RouterFeatures[] = [
   withEnabledBlockingInitialNavigation(),
   withComponentInputBinding(),
@@ -18,7 +21,12 @@ const routerProviderFeatures: RouterFeatures[] = [
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, ...routerProviderFeatures),
-    provideAnimationsAsync(), provideAnimationsAsync(),
+    importProvidersFrom(
+      BrowserModule,
+      BrowserAnimationsModule,
+      HttpClientModule
+    ),
+    provideAnimationsAsync(),
     provideStore()
 ],
 };
