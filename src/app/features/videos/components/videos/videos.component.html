@@ -1,7 +1,27 @@
 <div>
-  <ul>
-    @for (video of (videos$ | async); track video) {
-      <li>{{ video | json }}</li>
-    }
-  </ul>
+  @if (videos$ | async; as videos) {
+    <p-table [value]="videos" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Thumbnail</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-video>
+        <tr>
+          <td>{{ video.title }}</td>
+          <td>{{ video.description }}</td>
+          <td>
+            <img
+              [src]="video.thumbnail"
+              [alt]="video.title"
+              width="100"
+              class="shadow-4"
+            />
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  }
 </div>
